@@ -1,2 +1,61 @@
 <root>
+	<HP>				INT32		</HP>
+	<MP>				INT32		</MP>
+	<DBID>				UINT64		</DBID>
+
+	<TEST_STRUCT>	FIXED_DICT
+		<!--<implementedBy>TEST_STRUCT.single_struct</implementedBy>-->
+		<Properties>
+			<param1>
+				<Type>	INT32	</Type>
+			</param1>
+			<param2>
+				<Type>	UNICODE	</Type>
+				<DatabaseLength> 256 </DatabaseLength>
+			</param2>
+		</Properties>
+	</TEST_STRUCT>	
+	
+	<TEST_STRUCT_LIST>	FIXED_DICT
+		<!-- <implementedBy>TEST_STRUCT.struct_list</implementedBy> -->
+		<Properties>
+			<id>
+				<Type>	INT32	</Type>
+			</id>
+			<name>
+				<Type>	UNICODE	</Type>
+				<DatabaseLength> 256 </DatabaseLength>
+			</name>
+			<data>
+				<Type>	ARRAY <of> TEST_STRUCT </of> </Type>
+			</data>
+		</Properties>
+	</TEST_STRUCT_LIST>	
+
+	<AVATAR_DESCRIBE> FIXED_DICT
+		<Properties>
+			<db_id>
+				<Type> DBID </Type>
+			</db_id>
+			<name>
+				<Type> UNICODE </Type>
+				<DatabaseLength> 256 </DatabaseLength>
+			</name>
+			<role_type>
+				<Type> INT32 </Type>
+			</role_type>
+			<Level>
+				<Type> INT32 </Type>
+			</Level>
+			<Exp>
+				<Type> INT32 </Type>
+			</Exp>
+			<Addr_Id>
+				<Type> INT32 </Type>
+			</Addr_Id>
+		</Properties>
+	</AVATAR_DESCRIBE>
+
+	<AVATAR_DESCRIBE_LIST> ARRAY <of> AVATAR_DESCRIBE </of>	</AVATAR_DESCRIBE_LIST>
+
 </root>

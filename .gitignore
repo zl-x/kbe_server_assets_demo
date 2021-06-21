@@ -2,3 +2,14 @@ scripts/base/__pycache__/Account.cpython-37.pyc
 scripts/base/__pycache__/kbemain.cpython-37.pyc
 scripts/cell/__pycache__/kbemain.cpython-37.pyc
 scripts/common/__pycache__/KBEDebug.cpython-37.pyc
+scripts/common/__pycache__/
+scripts/cell/interfaces/__pycache__/
+scripts/interface/__pycache__/
+scripts/logger/__pycache__/
+scripts/cell/__pycache__/
+scripts/base/__pycache__/
+scripts/db/__pycache__/
+scripts/login/__pycache__/
+scripts/base/interfaces/__pycache__/
+logs/
+.idea/
