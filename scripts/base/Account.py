@@ -43,6 +43,7 @@ class Account(KBEngine.Proxy):
         '''
             entity 事件回调
         '''
+        self.testFunction()
 
     def onCreateCellFailure(self):
         '''
@@ -368,3 +369,35 @@ class Account(KBEngine.Proxy):
         # 通知客户端
         if self.client:
             self.client.reqCreateAvatarResultOnClient(not success, avatarinfo)
+
+
+    def testFunction(self):
+        self.lastSelCharacter = 123
+
+        while self.characters:
+            self.characters.pop()
+
+        tmpVal = {}
+        tmpVal["db_id"] = 444
+        tmpVal["name"] = "name"
+        tmpVal["role_type"] = 555
+        tmpVal["Level"] = 666
+        tmpVal["Exp"] = 777
+        tmpVal["Addr_Id"] = 888
+        self.characters.append(tmpVal)
+
+        tmpVal1 = {}
+        tmpVal1["db_id"] = 4444
+        tmpVal1["name"] = "nameqq"
+        tmpVal1["role_type"] = 5555
+        tmpVal1["Level"] = 6666
+        tmpVal1["Exp"] = 7777
+        tmpVal1["Addr_Id"] = 8888
+        self.characters.append(tmpVal1)
+
+        self.test_val["param1"] = 100
+        self.test_val["param2"] = "param2"
+
+        self.writeToDB()
+
+

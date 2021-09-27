@@ -13,3 +13,4 @@ scripts/login/__pycache__/
 scripts/base/interfaces/__pycache__/
 logs/
 .idea/
+kbengine_unity3d_plugins/
