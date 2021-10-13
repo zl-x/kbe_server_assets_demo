@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.base as kbe
+from kbengine import debug
 import sys
 
 '''
@@ -28,13 +28,13 @@ import sys
     最后一次收到客户端数据包时到目前为止所过去的时间（秒）。 
 '''
 
-class Account(KBEngine.Proxy):
+class Account(kbe.Proxy):
     def __init__(self):
-        KBEngine.Proxy.__init__(self)
+        kbe.Proxy.__init__(self)
 
-        DEBUG_MSG(dir(self))
+        debug.DEBUG_MSG(dir(self))
 
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
 
         # 顶号时使用, 其他时间都是为 None
         self.avatarEntity = None
@@ -54,27 +54,27 @@ class Account(KBEngine.Proxy):
         '''
             如果这个函数在脚本中有实现，这个函数在cell实体创建失败的时候被调用。这个函数没有参数。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onDestroy(self):
         """
             如果这个函数在脚本中有实现，这个函数在调用Entity.destroy()后，在实际销毁之前被调用。这个函数没有参数。
         """
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
 
     def onGetCell(self):
         '''
             如果这个函数在脚本中有实现，这个函数在它获得cell实体的时候被调用。这个函数没有参数。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onLoseCell(self):
         '''
             如果这个函数在脚本中有实现，这个函数在它关联的cell实体销毁之后被调用。这个函数没有参数。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
 
         self.destroy()
 
@@ -85,14 +85,14 @@ class Account(KBEngine.Proxy):
             如果这个函数在脚本中有实现，这个函数在该实体自动写入数据库之前被调用。这个回调在Entity.onWriteToDB回调之前被调用。
             如果该回调返回False，该归档操作中止。这个回调应该返回True使得操作继续。如果这个回调不存在，则归档操作继续进行
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         return True
 
     def onRestore(self):
         '''
             如果这个函数在脚本中有实现，这个函数在Entity应用程序崩溃后在其它Entity应用程序上重新创建该实体时被调用。这个函数没有参数。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onTimer(self, timerHandle, userData):
@@ -105,15 +105,15 @@ class Account(KBEngine.Proxy):
             定时器的 id 便于删除
             用户数据用于分辨定时器
         """
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
 
         if userData == 0:
             # self.delTimer(timerHandle)
             self.lastSelCharacter += 1
-            DEBUG_MSG("change self.lastSelCharacter=====================")
+            debug.DEBUG_MSG("change self.lastSelCharacter=====================")
         elif userData == 1:
             self.QQQQ.cccccc += 1
-            DEBUG_MSG("change self.QQQQ.cccccc=====================")
+            debug.DEBUG_MSG("change self.QQQQ.cccccc=====================")
 
     def onTeleportFailure(self):
         '''
@@ -128,7 +128,7 @@ class Account(KBEngine.Proxy):
                 参数： baseEntityMB 实体应该移到的指定实体所在的空间，baseEntityMB即指定实体的EntityCall。
                 当成功的时候，与此参数相关联的cell实体会被传入到Entity.onTeleportSuccess函数。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onTeleportSuccess(self, nearbyEntity):
@@ -137,7 +137,7 @@ class Account(KBEngine.Proxy):
             参数：
                 nearbyEntity  这个参数由用户调用 Entity.teleport时给出。这是一个real实体
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onWriteToDB(self, cellData):
@@ -148,7 +148,7 @@ class Account(KBEngine.Proxy):
             参数：
                 cellData 包含将要存进数据库的cell属性。 cellData是一个字典。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     '''
@@ -159,7 +159,7 @@ class Account(KBEngine.Proxy):
         '''
             如果在脚本中实现了此回调，这个方法将在客户端断开连接时被调用。 这个方法没有参数
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
 
         # 有 cell 部分, 删除 cell, 在 cell 被删除的通知中再删除 self
         if self.cell:
@@ -173,25 +173,25 @@ class Account(KBEngine.Proxy):
         '''
             如果在脚本中实现了此回调，当客户端能够调用实体的cell属性时，该回调被调用
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onClientEnabled(self):
         """
-            KBEngine method.
+            kbe method.
             该entity被正式激活为可使用， 此时entity已经建立了client对应实体， 可以在此创建它的cell部分。
 
             如果在脚本中实现了此回调，当实体可用时（ 各种初始化完毕并且可以与客户端通讯 ）该回调被调用。 这个方法没有参数。
             注意：giveClientTo将控制权赋给了该实体时也会导致该回调被调用
         """
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onGiveClientToFailure(self):
         '''
             如果在脚本中实现了此回调，当实体调用giveClientTo失败时，该回调被调用。这个方法没有参数
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     def onLogOnAttempt(self, ip, port, password):
@@ -200,9 +200,9 @@ class Account(KBEngine.Proxy):
             这种情况通常是实体存在于内存中处于有效状态，最明显的例子是用户A使用此账号登录了，用户B使用同一账号进行登录，此时回调触发。
 
             这个回调函数可以返回如下常量值：
-            KBEngine.LOG_ON_ACCEPT：允许新的客户端与实体进行绑定，如果实体已经绑定了一个客户端，之前的客户端将被踢出。
-            KBEngine.LOG_ON_REJECT：拒绝新的客户端与实体绑定。
-            KBEngine.LOG_ON_WAIT_FOR_DESTROY：等待实体销毁后再进行客户端绑定。
+            kbe.LOG_ON_ACCEPT：允许新的客户端与实体进行绑定，如果实体已经绑定了一个客户端，之前的客户端将被踢出。
+            kbe.LOG_ON_REJECT：拒绝新的客户端与实体绑定。
+            kbe.LOG_ON_WAIT_FOR_DESTROY：等待实体销毁后再进行客户端绑定。
 
 
             参数：
@@ -212,7 +212,7 @@ class Account(KBEngine.Proxy):
         '''
 
 
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
 
         if self.avatarEntity:
             if self.avatarEntity.client:
@@ -226,7 +226,7 @@ class Account(KBEngine.Proxy):
             # 重置, 使得每次申请进入游戏时, avatarEntity 都是 None
             self.avatarEntity = None
 
-            return KBEngine.LOG_ON_ACCEPT
+            return kbe.LOG_ON_ACCEPT
 
     def onStreamComplete(self, id, success):
         '''
@@ -235,7 +235,7 @@ class Account(KBEngine.Proxy):
                 id  与下载关联的id。
                 success  成功与否。
         '''
-        DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
+        debug.DEBUG_MSG("%s-%s, dbID:%d, addr:%d" % (self.__class__.__name__, sys._getframe().f_code.co_name, self.id, id(self)))
         pass
 
     '''
@@ -244,13 +244,13 @@ class Account(KBEngine.Proxy):
     '''
 
     def sayHelloOnBase(self, int_val, str_val, int_len):
-        DEBUG_MSG("sayHelloOnBase: %d-%s-%d" % (int_val, str_val, int_len))
+        debug.DEBUG_MSG("sayHelloOnBase: %d-%s-%d" % (int_val, str_val, int_len))
         self.client.sayHelloOnClient(int_val * 2, str_val * 2, int_len * 2)
 
         self.change_test_val(int_val, str_val, int_len)
 
     def change_test_val(self, int_val, str_val, int_len):
-        DEBUG_MSG("change_test_val: %d-%s-%d" % (int_val, str_val, int_len))
+        debug.DEBUG_MSG("change_test_val: %d-%s-%d" % (int_val, str_val, int_len))
 
         # 更改单个
         val = dict()
@@ -292,13 +292,13 @@ class Account(KBEngine.Proxy):
             "position": (0, 0, 0),
         }
 
-        avatar = KBEngine.createEntityLocally('Avatar', props)
+        avatar = kbe.createEntityLocally('Avatar', props)
         if avatar:
             avatar.writeToDB(self._onAvatarSaved)
 
-            DEBUG_MSG("start to create avatar: role type:%d, name:%s" % (role_type, name))
+            debug.DEBUG_MSG("start to create avatar: role type:%d, name:%s" % (role_type, name))
         else:
-            DEBUG_MSG("create avatar faile: role type:%d, name:%s" % (role_type, name))
+            debug.DEBUG_MSG("create avatar faile: role type:%d, name:%s" % (role_type, name))
 
     def reqRemoveAvatarOnBase(self, db_id):
         '''
@@ -319,26 +319,26 @@ class Account(KBEngine.Proxy):
             申请进入游戏
         '''
 
-        KBEngine.createEntityFromDBID("Avatar", db_id, self.__onAvatarCreated)
+        kbe.createEntityFromDBID("Avatar", db_id, self.__onAvatarCreated)
 
     def __onAvatarCreated(self, baseRef, dbid, wasActive):
         """
             选择角色进入游戏时被调用
         """
         if wasActive:
-            ERROR_MSG("Account::__onAvatarCreated:(%i): this character is in world now!" % (self.id))
+            debug.ERROR_MSG("Account::__onAvatarCreated:(%i): this character is in world now!" % (self.id))
             return
         if baseRef is None:
-            ERROR_MSG("Account::__onAvatarCreated:(%i): the character you wanted to created is not exist!" % (self.id))
+            debug.ERROR_MSG("Account::__onAvatarCreated:(%i): the character you wanted to created is not exist!" % (self.id))
             return
 
-        avatar = KBEngine.entities.get(baseRef.id)
+        avatar = kbe.entities.get(baseRef.id)
         if avatar is None:
-            ERROR_MSG("Account::__onAvatarCreated:(%i): when character was created, it died as well!" % (self.id))
+            debug.ERROR_MSG("Account::__onAvatarCreated:(%i): when character was created, it died as well!" % (self.id))
             return
 
         if self.isDestroyed:
-            ERROR_MSG("Account::__onAvatarCreated:(%i): i dead, will the destroy of Avatar!" % (self.id))
+            debug.ERROR_MSG("Account::__onAvatarCreated:(%i): i dead, will the destroy of Avatar!" % (self.id))
             avatar.destroy()
             return
 
@@ -352,7 +352,7 @@ class Account(KBEngine.Proxy):
             新建角色写入数据库回调
         """
 
-        DEBUG_MSG("_onAvatarSaved begin: %d" % success)
+        debug.DEBUG_MSG("_onAvatarSaved begin: %d" % success)
 
         # 如果此时账号已经销毁， 角色已经无法被记录则我们清除这个角色
         if self.isDestroyed:
@@ -416,13 +416,13 @@ class Account(KBEngine.Proxy):
 
         self.writeToDB()
 
-        ERROR_MSG(dir(self.QQQQ))
-        ERROR_MSG(type(self.QQQQ))
+        debug.ERROR_MSG(dir(self.QQQQ))
+        debug.ERROR_MSG(type(self.QQQQ))
 
-        ERROR_MSG(dir(KBEngine.EntityComponent))
-        ERROR_MSG(type(KBEngine.EntityComponent))
+        debug.ERROR_MSG(dir(kbe.EntityComponent))
+        debug.ERROR_MSG(type(kbe.EntityComponent))
 
-        ERROR_MSG("++++++++++++++++++++++++++++++")
+        debug.ERROR_MSG("++++++++++++++++++++++++++++++")
 
 
 

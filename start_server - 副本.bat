@@ -1,3 +1,5 @@
+python copy_work.py
+
 @echo off
 set curpath=%~dp0
 
