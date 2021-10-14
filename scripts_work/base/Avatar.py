@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.base as kbe
+from kbengine import debug
 
 
-class Avatar(KBEngine.Proxy):
+class Avatar(kbe.Proxy):
     def __init__(self):
-        KBEngine.Proxy.__init__(self)
+        kbe.Proxy.__init__(self)
         self.accountEntity = None
 
     def setAccountEntity(self, accountEntity):
@@ -44,7 +44,7 @@ class Avatar(KBEngine.Proxy):
         """
             如果这个函数在脚本中有实现，这个函数在调用Entity.destroy()后，在实际销毁之前被调用。这个函数没有参数。
         """
-        DEBUG_MSG("account::onDestroy: %i." % self.id)
+        debug.DEBUG_MSG("account::onDestroy: %i." % self.id)
 
     def onGetCell(self):
         '''
@@ -83,7 +83,7 @@ class Avatar(KBEngine.Proxy):
             定时器的 id 便于删除
             用户数据用于分辨定时器
         """
-        DEBUG_MSG(id, userArg)
+        debug.DEBUG_MSG(id, userData)
 
     def onTeleportFailure(self):
         '''
@@ -136,13 +136,13 @@ class Avatar(KBEngine.Proxy):
 
     def onClientEnabled(self):
         """
-            KBEngine method.
+            kbe method.
             该entity被正式激活为可使用， 此时entity已经建立了client对应实体， 可以在此创建它的cell部分。
 
             如果在脚本中实现了此回调，当实体可用时（ 各种初始化完毕并且可以与客户端通讯 ）该回调被调用。 这个方法没有参数。
             注意：giveClientTo将控制权赋给了该实体时也会导致该回调被调用
         """
-        Space1 = KBEngine.globalData["Space1"]
+        Space1 = kbe.globalData["Space1"]
         self.createCellEntity(Space1.cell)
 
     def onGiveClientToFailure(self):
@@ -157,9 +157,9 @@ class Avatar(KBEngine.Proxy):
             这种情况通常是实体存在于内存中处于有效状态，最明显的例子是用户A使用此账号登录了，用户B使用同一账号进行登录，此时回调触发。
 
             这个回调函数可以返回如下常量值：
-            KBEngine.LOG_ON_ACCEPT：允许新的客户端与实体进行绑定，如果实体已经绑定了一个客户端，之前的客户端将被踢出。
-            KBEngine.LOG_ON_REJECT：拒绝新的客户端与实体绑定。
-            KBEngine.LOG_ON_WAIT_FOR_DESTROY：等待实体销毁后再进行客户端绑定。
+            kbe.LOG_ON_ACCEPT：允许新的客户端与实体进行绑定，如果实体已经绑定了一个客户端，之前的客户端将被踢出。
+            kbe.LOG_ON_REJECT：拒绝新的客户端与实体绑定。
+            kbe.LOG_ON_WAIT_FOR_DESTROY：等待实体销毁后再进行客户端绑定。
 
 
             参数：
@@ -167,7 +167,7 @@ class Avatar(KBEngine.Proxy):
                 port  尝试登录的客户端连接的端口。
                 password  用户登录时使用的MD5密码。
         '''
-        return KBEngine.LOG_ON_ACCEPT
+        return kbe.LOG_ON_ACCEPT
 
     def onStreamComplete(self, id, success):
         '''

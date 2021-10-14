@@ -2,4 +2,4 @@
 #
 """
 """
-from KBEDebug import *
+from kbengine import debug

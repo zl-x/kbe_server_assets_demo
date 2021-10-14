@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import KBEngine
-from KBEDebug import *
+from kbengine import debug
 
 """
 """
@@ -11,7 +11,7 @@ def onDBMgrReady():
 	KBEngine method.
 	dbmgr已经准备好了
 	"""
-	INFO_MSG('onDBMgrReady: bootstrapGroupIndex=%s, bootstrapGlobalIndex=%s' % \
+	debug.INFO_MSG('onDBMgrReady: bootstrapGroupIndex=%s, bootstrapGlobalIndex=%s' % \
 	 (os.getenv("KBE_BOOTIDX_GROUP"), os.getenv("KBE_BOOTIDX_GLOBAL")))
 
 	#KBEngine.addTimer(0.01, 1.0, onTick)
@@ -19,14 +19,14 @@ def onDBMgrReady():
 def onTick(timerID):
 	"""
 	"""
-	INFO_MSG('onTick()')
+	debug.INFO_MSG('onTick()')
 
 def onDBMgrShutDown():
 	"""
 	KBEngine method.
 	这个dbmgr被关闭前的回调函数
 	"""
-	INFO_MSG('onDBMgrShutDown()')
+	debug.INFO_MSG('onDBMgrShutDown()')
 
 def onSelectAccountDBInterface(accountName):
 	"""

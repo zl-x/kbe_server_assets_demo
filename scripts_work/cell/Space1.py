@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.cell as kbe
+from kbengine import debug
 
 
-class Space1(KBEngine.Space):
+class Space1(kbe.Space):
     def __init__(self):
         KBEngine.Space.__init__(self)

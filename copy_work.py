@@ -7,6 +7,21 @@ import shutil
 src_folder = "scripts_work"
 dst_folder = "scripts"
 
+debug_change_dict = dict(
+    old="from kbengine import debug\n",
+    new="import KBEDebug as debug\n")
+
+app_right_import = "import KBEngine as kbe\n"
+app_change_dict = dict(
+    base="import kbengine.base as kbe\n",
+    bots="import kbengine.bots as kbe\n",
+    cell="import kbengine.cell as kbe\n",
+    db="import kbengine.db as kbe\n",
+    interface="import kbengine.interface as kbe\n",
+    logger="import kbengine.logger as kbe\n",
+    login="import kbengine.login as kbe\n",
+)
+
 
 def copy_folder_tree():
     if os.path.exists(dst_folder):
@@ -41,7 +56,8 @@ def change_import(file_path):
     if len(path_list) < 2:
         return
 
-    old_content, new_content = get_changed_content(path_list[1])
+    if path_list[1] not in app_change_dict:
+        return
 
     fd = open(file_path, encoding='UTF-8')
     all_lines = fd.readlines()
@@ -52,20 +68,13 @@ def change_import(file_path):
     fd = open(file_path, mode="w", encoding='UTF-8')
 
     for i, content in enumerate(all_lines):
-        if content == "from kbengine import debug\n":
-            all_lines[i] = "import KBEDebug as debug\n"
-        elif content == old_content:
-            all_lines[i] = new_content
+        if content == debug_change_dict["old"]:
+            all_lines[i] = debug_change_dict["new"]
+        elif content == app_change_dict[path_list[1]]:
+            all_lines[i] = app_right_import
 
     fd.writelines(all_lines)
     fd.close()
-
-
-def get_changed_content(sec_folder_name):
-    if sec_folder_name == "base":
-        return "from kbengine import base as kbe\n", "import KBEngine as kbe\n"
-
-    return "", ""
 
 
 if __name__ == "__main__":

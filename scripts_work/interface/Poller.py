@@ -2,7 +2,7 @@
 import KBEngine
 import Functor
 import socket
-from KBEDebug import *
+from kbengine import debug
 
 class Poller:
 	"""
@@ -47,7 +47,7 @@ class Poller:
 			sock, addr = self._socket.accept()
 			self._clients[sock.fileno()] = (sock, addr)
 			KBEngine.registerReadFileDescriptor(sock.fileno(), self.onRecv)
-			DEBUG_MSG("Poller::onRecv: new channel[%s/%i]" % (addr, sock.fileno()))
+			debug.DEBUG_MSG("Poller::onRecv: new channel[%s/%i]" % (addr, sock.fileno()))
 		else:
 			sock, addr = self._clients.get(fileno, None)
 			if sock is None:
@@ -56,13 +56,13 @@ class Poller:
 			data = sock.recv(2048)
 
 			if len(data) == 0:
-				DEBUG_MSG("Poller::onRecv: %s/%i disconnect!" % (addr, sock.fileno()))
+				debug.DEBUG_MSG("Poller::onRecv: %s/%i disconnect!" % (addr, sock.fileno()))
 				KBEngine.deregisterReadFileDescriptor(sock.fileno())
 				sock.close()
 				del self._clients[fileno]
 				return
 
-			DEBUG_MSG("Poller::onRecv: %s/%i get data, size=%i" % (addr, sock.fileno(), len(data)))
+			debug.DEBUG_MSG("Poller::onRecv: %s/%i get data, size=%i" % (addr, sock.fileno(), len(data)))
 			self.processData(sock, data)
 			
 	def processData(self, sock, datas):

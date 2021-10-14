@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.cell as kbe
+from kbengine import debug
 
 
-class Avatar(KBEngine.Entity):
+class Avatar(kbe.Entity):
     def __init__(self):
-        KBEngine.Entity.__init__(self)
+        kbe.Entity.__init__(self)
 
     def onDestroy(self):
         '''

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.cell as kbe
+from kbengine import debug
 
 
-class FirstSpace(KBEngine.Space):
+class FirstSpace(kbe.Space):
     """
     FirstSpace的cell部分。
     """
 
     def __init__(self):
-        KBEngine.Space.__init__(self)
+        kbe.Space.__init__(self)
         pass

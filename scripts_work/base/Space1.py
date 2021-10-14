@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.base as kbe
+from kbengine import debug
 import sys
 
 
-class Space1(KBEngine.Space):
+class Space1(kbe.Space):
     def __init__(self):
-        KBEngine.Space.__init__(self)
+        kbe.Space.__init__(self)
         # 存储在globalData中，方便获取
-        KBEngine.globalData[self.__class__.__name__] = self
+        kbe.globalData[self.__class__.__name__] = self

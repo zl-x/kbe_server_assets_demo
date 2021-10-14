@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.cell as kbe
+from kbengine import debug
 
 
-class Entity_CallBack_Record(KBEngine.Entity):
+class Entity_CallBack_Record(kbe.Entity):
     def __init__(self):
-        KBEngine.Entity.__init__(self)
+        kbe.Entity.__init__(self)
 
     def onDestroy(self):
         '''

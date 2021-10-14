@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-import KBEngine
-from KBEDebug import *
+import kbengine.cell as kbe
+from kbengine import debug
 
 
-class FirstEntity(KBEngine.Entity):
+class FirstEntity(kbe.Entity):
     """
     第一个实体的cell部分的实现
     """
 
     def __init__(self):
-        KBEngine.Entity.__init__(self)
+        kbe.Entity.__init__(self)
         # 通知客户端，本实体已进入
         self.client.onEnter()
 
@@ -20,6 +20,6 @@ class FirstEntity(KBEngine.Entity):
         :param content: say的内容
         :return:
         """
-        INFO_MSG("FirstEntity::say")
+        debug.INFO_MSG("FirstEntity::say")
         # 广播给所有客户端的onSay方法
         self.allClients.onSay("Entity: " + str(self.id) + " " + content)

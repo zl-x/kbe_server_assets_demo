@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import KBEngine
-from KBEDebug import *
+from kbengine import debug
 
 """
 logger进程主要处理KBEngine服务端的日志保存工作。
@@ -12,7 +12,7 @@ def onLoggerAppReady():
 	KBEngine method.
 	logger已经准备好了
 	"""
-	INFO_MSG('onLoggerAppReady: bootstrapGroupIndex=%s, bootstrapGlobalIndex=%s' % \
+	debug.INFO_MSG('onLoggerAppReady: bootstrapGroupIndex=%s, bootstrapGlobalIndex=%s' % \
 	 (os.getenv("KBE_BOOTIDX_GROUP"), os.getenv("KBE_BOOTIDX_GLOBAL")))
 
 def onLoggerAppShutDown():
@@ -20,7 +20,7 @@ def onLoggerAppShutDown():
 	KBEngine method.
 	这个logger被关闭前的回调函数
 	"""
-	INFO_MSG('onLoggerAppShutDown()')
+	debug.INFO_MSG('onLoggerAppShutDown()')
 
 def onReadyForShutDown():
 	"""
@@ -29,7 +29,7 @@ def onReadyForShutDown():
 	如果返回True，则进程会进入shutdown的流程，其它值会使得进程在过一段时间后再次询问。
 	用户可以在收到消息时进行脚本层的数据清理工作，以让脚本层的工作成果不会因为shutdown而丢失。
 	"""
-	INFO_MSG('onReadyForShutDown()')
+	debug.INFO_MSG('onReadyForShutDown()')
 	return True
 
 def onLogWrote(logData):

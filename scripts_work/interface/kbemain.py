@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import KBEngine
-from KBEDebug import *
+from kbengine import debug
 from Poller import Poller
 
 """
@@ -38,7 +38,7 @@ def onInterfaceAppReady():
 	KBEngine method.
 	interfaces已经准备好了
 	"""
-	INFO_MSG('onInterfaceAppReady: bootstrapGroupIndex=%s, bootstrapGlobalIndex=%s' % \
+	debug.INFO_MSG('onInterfaceAppReady: bootstrapGroupIndex=%s, bootstrapGlobalIndex=%s' % \
 	 (os.getenv("KBE_BOOTIDX_GROUP"), os.getenv("KBE_BOOTIDX_GLOBAL")))
 
 	#KBEngine.addTimer(0.01, 1.0, onTick)
@@ -47,14 +47,14 @@ def onInterfaceAppReady():
 def onTick(timerID):
 	"""
 	"""
-	INFO_MSG('onTick()')
+	debug.INFO_MSG('onTick()')
 
 def onInterfaceAppShutDown():
 	"""
 	KBEngine method.
 	这个interfaces被关闭前的回调函数
 	"""
-	INFO_MSG('onInterfaceAppShutDown()')
+	debug.INFO_MSG('onInterfaceAppShutDown()')
 	g_poller.stop()
 
 def onRequestCreateAccount(registerName, password, datas):
@@ -70,7 +70,7 @@ def onRequestCreateAccount(registerName, password, datas):
 	@param datas: 客户端请求时所附带的数据，可将数据转发第三方平台
 	@type  datas: bytes
 	"""
-	INFO_MSG('onRequestCreateAccount: registerName=%s' % (registerName))
+	debug.INFO_MSG('onRequestCreateAccount: registerName=%s' % (registerName))
 	
 	commitName = registerName
 	
@@ -97,7 +97,7 @@ def onRequestAccountLogin(loginName, password, datas):
 	@param datas: 客户端请求时所附带的数据，可将数据转发第三方平台
 	@type  datas: bytes
 	"""
-	INFO_MSG('onRequestAccountLogin: registerName=%s' % (loginName))
+	debug.INFO_MSG('onRequestAccountLogin: registerName=%s' % (loginName))
 	
 	commitName = loginName
 	
@@ -125,7 +125,7 @@ def onRequestCharge(ordersID, entityDBID, datas):
 	@param datas: 客户端请求时所附带的数据，可将数据转发第三方平台
 	@type  datas: bytes
 	"""
-	INFO_MSG('onRequestCharge: entityDBID=%s, entityDBID=%s' % (ordersID, entityDBID))
+	debug.INFO_MSG('onRequestCharge: entityDBID=%s, entityDBID=%s' % (ordersID, entityDBID))
 	
 	# 此处可通过http等手段将请求提交至第三方平台，平台返回的数据也可放入datas
 	# datas将会回调至baseapp的订单回调中，具体参考API手册charge
