@@ -77,14 +77,15 @@
 			<Arg>			DBID				</Arg>	<!-- dbid -->
 		</selectAvatarEnterGameOnBase>
 
+		<createAvatar>
+			<Exposed/>
+		</createAvatar>
+		<giveClientToAvatar>
+			<Exposed/>
+		</giveClientToAvatar>
 	</BaseMethods>
 
 	<CellMethods>
 	</CellMethods>
 
-	<Components>
-		<QQQQ>
-			<Type> TestComp </Type>
-		</QQQQ>
-	</Components>
 </root>

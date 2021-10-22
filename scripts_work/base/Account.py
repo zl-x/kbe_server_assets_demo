@@ -39,17 +39,6 @@ class Account(kbe.Proxy):
         # 顶号时使用, 其他时间都是为 None
         self.avatarEntity = None
 
-        '''
-            entity 事件回调
-        '''
-        self.testFunction()
-
-        '''
-            测试定时器
-        '''
-        self.addTimer(1, 2, 0)
-        self.addTimer(2, 2, 1)
-
     def onCreateCellFailure(self):
         '''
             如果这个函数在脚本中有实现，这个函数在cell实体创建失败的时候被调用。这个函数没有参数。
@@ -383,46 +372,22 @@ class Account(kbe.Proxy):
         if self.client:
             self.client.reqCreateAvatarResultOnClient(not success, avatarinfo)
 
+    def createAvatar(self):
 
-    def testFunction(self):
-        self.lastSelCharacter = 123
+        if self.lastSelCharacter == 0:
+            def onCreateEntityCallback(entity):
+                if entity:
+                    self.avatarEntity = entity
 
-        while self.characters:
-            self.characters.pop()
+                debug.WARNING_MSG("createAvatar={}".format(entity))
 
-        tmpVal = {}
-        tmpVal["db_id"] = 444
-        tmpVal["name"] = "name"
-        tmpVal["role_type"] = 555
-        tmpVal["Level"] = 666
-        tmpVal["Exp"] = 777
-        tmpVal["Addr_Id"] = 888
-        self.characters.append(tmpVal)
+            kbe.createEntityAnywhere("Avatar", {}, onCreateEntityCallback)
+        else:
+            def onCreateEntityCallback(baseRef, databaseID, wasActive):
+                if baseRef:
+                    self.avatarEntity = baseRef
 
-        tmpVal1 = {}
-        tmpVal1["db_id"] = 4444
-        tmpVal1["name"] = "nameqq"
-        tmpVal1["role_type"] = 5555
-        tmpVal1["Level"] = 6666
-        tmpVal1["Exp"] = 7777
-        tmpVal1["Addr_Id"] = 8888
-        self.characters.append(tmpVal1)
+            kbe.createEntityAnywhereFromDBID("Avatar", self.lastSelCharacter, onCreateEntityCallback)
 
-        self.test_val["param1"] = 100
-        self.test_val["param2"] = "param2"
-
-        self.QQQQ.cccccc = 998
-        self.QQQQ.moveSpeed = 888
-
-        self.writeToDB()
-
-        debug.ERROR_MSG(dir(self.QQQQ))
-        debug.ERROR_MSG(type(self.QQQQ))
-
-        debug.ERROR_MSG(dir(kbe.EntityComponent))
-        debug.ERROR_MSG(type(kbe.EntityComponent))
-
-        debug.ERROR_MSG("++++++++++++++++++++++++++++++")
-
-
-
+    def giveClientToAvatar(self):
+        self.giveClientTo(self.avatarEntity)
