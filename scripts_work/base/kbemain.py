@@ -17,7 +17,6 @@ def onBaseAppReady(isBootstrap):
 
     # baseapp就绪时，创建一个 Space_Test 空间实体
     if isBootstrap:
-        kbe.createEntityAnywhere("Space_Test", {})
         kbe.createEntityAnywhere("Space1", {})
 
 

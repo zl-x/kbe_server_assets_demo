@@ -6,8 +6,7 @@
 	-->
 
 	<!-- <Avatar/> -->
-	<Account hasClient="true"></Account><!-- <Account hasCell="true" hasBase="true" hasClient="true"></Account> -->
-	<Avatar hasClient="true"></Avatar>
-	<Space_Test></Space_Test>
-	<Space1></Space1>
+	<Account hasClient="true"/><!-- <Account hasCell="true" hasBase="true" hasClient="true"></Account> -->
+	<Avatar hasClient="true"/>
+	<Space1/>
 </root>

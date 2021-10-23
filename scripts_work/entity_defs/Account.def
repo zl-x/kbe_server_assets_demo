@@ -1,91 +1,57 @@
 <root>
-	<Properties>
-		<test_val>
-			<Type>	TEST_STRUCT	</Type>
-			<Flags>	BASE_AND_CLIENT	</Flags>
-			<Persistent>	true	</Persistent>
-		</test_val>
+    <Properties>
 
-		<test_val_list>
-			<Type>	TEST_STRUCT_LIST	</Type>
-			<Flags>	BASE_AND_CLIENT	</Flags>
-			<Persistent>	true	</Persistent>
-		</test_val_list>
+    </Properties>
 
-        <characters>
-			<Type>			AVATAR_DESCRIBE_LIST	</Type>
-			<Flags>			BASE			        </Flags>
-			<Persistent>		true				</Persistent>
-        </characters>
+    <ClientMethods>
+        <onSayHelloOnClient>
+            <Arg>UNICODE</Arg>
+        </onSayHelloOnClient>
 
-        <lastSelCharacter>
-			<Type>			DBID					</Type>
-			<Flags>			BASE_AND_CLIENT			</Flags>
-			<Default>		0						</Default>
-			<Persistent>		true				</Persistent>
-		</lastSelCharacter>
+        <onAvatarListResultOnClient>
+            <Arg>AVATAR_DESCRIBE_LIST</Arg>
+        </onAvatarListResultOnClient>
 
-	</Properties>
+        <onCreateAvatarResultOnClient>
+            <Arg>INT32</Arg>    <!-- result -->
+            <Arg>AVATAR_DESCRIBE</Arg>
+        </onCreateAvatarResultOnClient>
 
-	<ClientMethods>
-		<sayHelloOnClient>
-			<Arg>   INT32         </Arg>
-			<Arg>   UNICODE         </Arg>
-			<Arg>   INT32         </Arg>
-        </sayHelloOnClient>
+        <onRemoveAvatarResultOnClient>
+            <Arg>INT32</Arg>    <!-- result -->
+        </onRemoveAvatarResultOnClient>
+    </ClientMethods>
 
-        <reqAvatarListResultOnClient>
-            <Arg>   AVATAR_DESCRIBE_LIST         </Arg>
-		</reqAvatarListResultOnClient>
+    <BaseMethods>
+        <sayHello>
+            <Exposed/>
+            <Arg>INT32</Arg>
+            <Arg>UNICODE</Arg>
+            <Arg>INT32</Arg>
+        </sayHello>
 
-		<reqCreateAvatarResultOnClient>
-			<Arg>			INT32				</Arg>	<!-- result -->
-			<Arg>       AVATAR_DESCRIBE         </Arg>
-		</reqCreateAvatarResultOnClient>
+        <reqAvatarList>
+            <Exposed/>
+        </reqAvatarList>
 
-		<reqRemoveAvatarResultOnClient>
-			<Arg>			INT32				</Arg>	<!-- result -->
-		</reqRemoveAvatarResultOnClient>
+        <reqCreateAvatar>
+            <Exposed/>
+            <Arg>INT32</Arg>
+            <Arg>UNICODE</Arg>
+        </reqCreateAvatar>
 
-	</ClientMethods>
+        <reqRemoveAvatar>
+            <Exposed/>
+            <Arg>DBID</Arg>    <!-- dbid -->
+        </reqRemoveAvatar>
 
-	<BaseMethods>
-		<sayHelloOnBase>
-			<Exposed/>
-			<Arg>   INT32         </Arg>
-			<Arg>   UNICODE         </Arg>
-			<Arg>   INT32         </Arg>
-        </sayHelloOnBase>
+        <selectAvatarEnterGame>
+            <Exposed/>
+            <Arg>DBID</Arg>    <!-- dbid -->
+        </selectAvatarEnterGame>
+    </BaseMethods>
 
-        <reqAvatarListOnBase>
-			<Exposed/>
-		</reqAvatarListOnBase>
-
-		<reqCreateAvatarOnBase>
-			<Exposed/>
-			<Arg>			INT32				</Arg>	<!-- roleType -->
-			<Arg>			UNICODE				</Arg>	<!-- name 为什么这里不需要长度定义??-->
-		</reqCreateAvatarOnBase>
-
-		<reqRemoveAvatarOnBase>
-			<Exposed/>
-			<Arg>			DBID				</Arg>	<!-- dbid -->
-		</reqRemoveAvatarOnBase>
-
-		<selectAvatarEnterGameOnBase>
-			<Exposed/>
-			<Arg>			DBID				</Arg>	<!-- dbid -->
-		</selectAvatarEnterGameOnBase>
-
-		<createAvatar>
-			<Exposed/>
-		</createAvatar>
-		<giveClientToAvatar>
-			<Exposed/>
-		</giveClientToAvatar>
-	</BaseMethods>
-
-	<CellMethods>
-	</CellMethods>
+    <CellMethods>
+    </CellMethods>
 
 </root>
