@@ -3,16 +3,13 @@
 
     <AVATAR_DESCRIBE>FIXED_DICT
         <Properties>
-            <dbId>
-                <Type>DBID</Type>
-            </dbId>
+            <roleType>
+                <Type>INT32</Type>
+            </roleType>
             <name>
                 <Type>UNICODE</Type>
                 <DatabaseLength>256</DatabaseLength>
             </name>
-            <roleType>
-                <Type>INT32</Type>
-            </roleType>
             <level>
                 <Type>INT32</Type>
             </level>

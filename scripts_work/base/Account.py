@@ -1,38 +1,17 @@
 # -*- coding: utf-8 -*-
 import kbengine.base as kbe
 from kbengine import debug
-import sys
 
-'''
-    __ACCOUNT_NAME__ 
-    说明：
-    如果proxy是帐号则可以访问__ACCOUNT_NAME__得到帐号名。 
-    
-    __ACCOUNT_PASSWORD__ 
-    说明：
-    如果proxy是帐号则可以访问__ACCOUNT_PASSWORD__得到帐号MD5密码。 
-    
-    clientAddr 
-    这是一个tuple对象，包含了客户端的ip与端口。 
-    
-    clientEnabled 
-    实体是否已经可用。在实体可用之前脚本不能与客户端进行通讯。 
-    
-    hasClient 
-    Proxy是否绑定了一个客户端连接。 
-    
-    roundTripTime 
-    在一段时间内服务器与这个Proxy绑定的客户端通讯平均往返时间。这个属性只在Linux下生效。 
-    
-    timeSinceHeardFromClient 
-    最后一次收到客户端数据包时到目前为止所过去的时间（秒）。 
-'''
+from base import Avatar
 
 
 class Account(kbe.Proxy):
+    roleIdList = list()
+
     def __init__(self):
         kbe.Proxy.__init__(self)
-        self.avatarEntity = None
+        self.activeAvatar = None
+        self.avatarId2Entity = dict()
 
     def onClientEnabled(self):
         """
@@ -42,7 +21,37 @@ class Account(kbe.Proxy):
             如果在脚本中实现了此回调，当实体可用时（ 各种初始化完毕并且可以与客户端通讯 ）该回调被调用。 这个方法没有参数。
             注意：giveClientTo将控制权赋给了该实体时也会导致该回调被调用
         """
-        pass
+
+        debug.ERROR_MSG("avatar dbid list={}".format(self.roleIdList))
+
+        def cb(baseRef: Avatar.Avatar, databaseID: int, wasActive: bool):
+            if not baseRef:
+                debug.ERROR_MSG("create avatar dbid={} active={}".format(databaseID, wasActive))
+                return
+
+            debug.DEBUG_MSG("create avatar dbid={} active={}".format(databaseID, wasActive))
+
+            self.avatarId2Entity[databaseID] = baseRef
+
+        for dbId in self.roleIdList:
+            kbe.createEntityAnywhereFromDBID("Avatar", dbId, cb)
+
+    def onDestroy(self):
+        debug.ERROR_MSG("account onDestroy")
+
+    def giveClinetToAccountEntity(self):
+        '''
+            转让客户端发送消息到 base 的 entity 的权限
+        '''
+        if not self.avatarId2Entity:
+            debug.ERROR_MSG("self.avatarId2Entity emtpy")
+            return
+
+        firstKey = list(self.avatarId2Entity.keys())[-1]
+        self.activeAvatar: Avatar.Avatar = self.avatarId2Entity[firstKey]
+
+        self.activeAvatar.setAccountEntity(self)
+        self.giveClientTo(self.activeAvatar)
 
     def sayHello(self, arg1: int, arg2: str, arg3: int) -> None:
         pass
@@ -51,7 +60,17 @@ class Account(kbe.Proxy):
         pass
 
     def reqCreateAvatar(self, arg1: int, arg2: str) -> None:
-        pass
+        param = dict(
+            name=arg2,
+            roleType=arg1,
+        )
+
+        def cb(avatarEntity: Avatar.Avatar):
+            debug.ERROR_MSG("avatar created{}".format(avatarEntity))
+            if not avatarEntity:
+                return
+
+        kbe.createEntityAnywhere("Avatar", param, cb)
 
     def reqRemoveAvatar(self, arg1: int) -> None:
         pass

@@ -1,6 +1,10 @@
 <root>
     <Properties>
-
+        <roleIdList>
+            <Type>ARRAY<of>DBID</of></Type>
+            <Flags>BASE_AND_CLIENT</Flags>
+            <Persistent>true</Persistent>
+        </roleIdList>
     </Properties>
 
     <ClientMethods>
