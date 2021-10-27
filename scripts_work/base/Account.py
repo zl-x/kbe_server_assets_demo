@@ -10,7 +10,7 @@ class Account(kbe.Proxy):
 
     def __init__(self):
         kbe.Proxy.__init__(self)
-        self.activeAvatar = None
+        self.activeAvatar: Avatar.Avatar = None
         self.avatarId2Entity = dict()
 
     def onClientEnabled(self):
@@ -38,6 +38,12 @@ class Account(kbe.Proxy):
 
     def onDestroy(self):
         debug.ERROR_MSG("account onDestroy")
+
+    def onLogOnAttempt(self, ip, port, password):
+        if self.activeAvatar and self.activeAvatar.hasClient:
+            self.activeAvatar.OnReplaceLogin()
+
+        return kbe.LOG_ON_ACCEPT
 
     def giveClinetToAccountEntity(self):
         '''

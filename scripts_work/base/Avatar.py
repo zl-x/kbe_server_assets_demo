@@ -32,3 +32,11 @@ class Avatar(kbe.Proxy):
     def entrySpace1(self):
         if self.hasClient:
             self.createCellEntity(kbe.globalData["Space1"].cell)
+
+    def OnReplaceLogin(self):
+        if self.cell:
+            self.destroyCellEntity()
+
+        self.destroyCellEntity()
+
+        self.giveClientTo(self.accountEntity)
