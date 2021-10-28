@@ -6,6 +6,11 @@
 		这样的好处是不会破坏引擎的默认设置，在你更新引擎时也不会产生冲突，以及在多个逻辑项目时不会影响到其他的项目设置。
 		详细说明请参考：http://kbengine.org/cn/docs/configuration/kbengine.html
 	-->
+
+	<!-- 游戏逻辑处理频率HZ
+		(Update frequency process, HZ)
+	-->
+	<gameUpdateHertz> 10 </gameUpdateHertz>
 	
 	<trace_packet>
 		<debug_type> 0 </debug_type>
@@ -65,6 +70,7 @@
 	</dbmgr>
 	
 	<baseapp>
-		<backupPeriod> 500 </backupPeriod>
+		<archivePeriod> 60 </archivePeriod>
+		<backupPeriod> 60 </backupPeriod>
 	</baseapp>
 </root>

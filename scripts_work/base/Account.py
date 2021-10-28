@@ -82,4 +82,15 @@ class Account(kbe.Proxy):
         pass
 
     def selectAvatarEnterGame(self, arg1: int) -> None:
-        pass
+        if not arg1:
+            arg1 = 1
+
+        if arg1 not in self.avatarId2Entity:
+            debug.ERROR_MSG("self.avatarId2Entity {}".format(arg1))
+            return
+
+        self.avatarId2Entity = self.avatarId2Entity[arg1]
+
+        self.giveClinetToAccountEntity()
+
+        self.activeAvatar.entrySpace1()
